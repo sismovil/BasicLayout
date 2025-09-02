@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -78,6 +79,8 @@ fun SearchBarPreview(){
 
 @Composable
 fun AlignYourBodyElement(
+    @DrawableRes drawable: Int,
+    @StringRes text: Int,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -85,14 +88,14 @@ fun AlignYourBodyElement(
         modifier = modifier
     ) {
         Image(
-            painter = painterResource(R.drawable.ab1_inversions),
+            painter = painterResource(drawable),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = modifier
                 .size(80.dp)
                 .clip(shape = CircleShape)
         )
-        Text(text = stringResource(R.string.ab1_inversions))
+        Text(text = stringResource(text))
     }
 }
 
@@ -100,7 +103,19 @@ fun AlignYourBodyElement(
 @Preview(locale = "es")
 @Composable
 fun AlignYourBodyElementPreview(){
-    AlignYourBodyElement()
+    AlignYourBodyElement(
+        drawable = R.drawable.ab5_hiit,
+        text = R.string.ab5_hiit
+    )
+}
+
+@Preview(locale = "it")
+@Composable
+fun AlignYourBodyElementPreviewIt(){
+    AlignYourBodyElement(
+        drawable = R.drawable.ab2_quick_yoga,
+        text = R.string.ab2_quick_yoga
+    )
 }
 
 
