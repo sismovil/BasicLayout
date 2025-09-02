@@ -1,5 +1,6 @@
 package edu.unicauca.aplimovil.basiclayout
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.paddingFromBaseline
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -19,6 +21,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -74,7 +77,10 @@ fun SearchBar(
 @Preview(locale = "it")
 @Composable
 fun SearchBarPreview(){
+BasicLayoutTheme {
     SearchBar()
+}
+
 }
 
 @Composable
@@ -95,7 +101,11 @@ fun AlignYourBodyElement(
                 .size(80.dp)
                 .clip(shape = CircleShape)
         )
-        Text(text = stringResource(text))
+        Text(
+            text = stringResource(text),
+            modifier = Modifier.paddingFromBaseline(top = 24.dp, bottom = 8.dp),
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
 
@@ -103,19 +113,35 @@ fun AlignYourBodyElement(
 @Preview(locale = "es")
 @Composable
 fun AlignYourBodyElementPreview(){
+BasicLayoutTheme {
     AlignYourBodyElement(
         drawable = R.drawable.ab5_hiit,
         text = R.string.ab5_hiit
     )
 }
 
-@Preview(locale = "it")
+}
+
+@Preview(
+    name = "Dark Mode Preview",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    locale = "it"
+)
 @Composable
 fun AlignYourBodyElementPreviewIt(){
-    AlignYourBodyElement(
-        drawable = R.drawable.ab2_quick_yoga,
-        text = R.string.ab2_quick_yoga
-    )
+    BasicLayoutTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.primary
+        ){
+            AlignYourBodyElement(
+                drawable = R.drawable.ab2_quick_yoga,
+                text = R.string.ab2_quick_yoga
+            )
+        }
+    }
+
+
 }
 
 
